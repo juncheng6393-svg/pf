@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LU Juncheng - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19', // Deep dark background
+                            primary: '#1e1b4b', // Navy
+                            accent: '#6366f1', // Indigo accent
+                        },
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        marquee: 'marquee 40s linear infinite', 
+                        'marquee-reverse': 'marquee-reverse 40s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'marquee-reverse': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Redesigned Nav: Classic Glass Top Bar */
+        .nav-glass {
+            background: rgba(15, 23, 42, 0.4); /* Slightly darker for contrast */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Project Card Shadow & Transition */
+        .project-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            background: white;
+            border: 1px solid #f1f5f9;
+        }
+        
+        /* Deep Header Gradient */
+        .hero-bg {
+            background: radial-gradient(circle at 50% 0%, #2e1065 0%, #0f172a 60%, #020617 100%);
+        }
+
+        /* Marquee wrapper to hide overflow */
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        /* Front Page Card Style for Marquee */
+        .front-page-card {
+            height: 220px; 
+            aspect-ratio: 3/4; 
+            object-fit: cover;
+            border-radius: 12px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            background-color: #1e293b;
+            filter: grayscale(100%) brightness(0.8);
+            transition: filter 0.3s ease, transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .front-page-card:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Contact Marquee Text */
+        .contact-marquee-text {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1); /* Changed to dark for light bg */
+            color: transparent;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: #6366f1;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+
+    <!-- Redesigned Navigation (Fixed Top, Glass Effect) -->
+    <nav class="fixed w-full top-0 z-50 nav-glass transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-900 font-bold text-sm shadow-lg group-hover:scale-110 transition-transform">
+                        L
+                    </div>
+                    <span class="text-white font-bold tracking-tight uppercase transition-colors">LU Juncheng</span>
+                </a>
+                
+                <!-- Center Links -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#about" class="text-base font-bold text-white hover:opacity-80 transition-opacity relative group">
+                        About
+                    </a>
+                    <a href="#projects" class="text-base font-bold text-white hover:opacity-80 transition-opacity relative group">
+                        Selected Works
+                    </a>
+                    <a href="#experience" class="text-base font-bold text-white hover:opacity-80 transition-opacity relative group">
+                        Experience
+                    </a>
+                </div>
+
+                <!-- Right CTA -->
+                <div>
+                    <a href="#contact" class="hidden md:inline-flex items-center justify-center px-6 py-2 text-xs font-bold text-white uppercase tracking-wider transition-all border-2 border-white rounded-full hover:bg-white hover:text-slate-900 focus:outline-none">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Dark Theme) -->
+    <section class="min-h-screen flex flex-col justify-center pt-20 relative overflow-hidden hero-bg text-white">
+        
+        <!-- Ambient Glow -->
+        <div class="absolute top-[-20%] left-[20%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex flex-col justify-center pb-64 relative z-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-indigo-200 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
+                    <i class="fas fa-map-marker-alt text-indigo-400"></i> Based in Hong Kong
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 drop-shadow-2xl">
+                    Journalism Student Dedicated to <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-white">Uncover Truth</span> and Trends.
+                </h1>
+            </div>
+        </div>
+
+        <!-- Marquee Strip (Dark Mode Integration - Online Images) -->
+        <div class="absolute bottom-0 w-full marquee-container overflow-hidden pb-12 pt-16 bg-gradient-to-t from-[#020617] to-transparent z-0">
+            <div class="flex gap-8 whitespace-nowrap animate-marquee items-end pl-8">
+                <!-- Using Unsplash images that match content -->
+                <img src="https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?q=80&w=400&auto=format&fit=crop" alt="Environmental" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=400&auto=format&fit=crop" alt="Family" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=400&auto=format&fit=crop" alt="Subway" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" alt="Classroom" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1555541624-95b7dd55f042?q=80&w=400&auto=format&fit=crop" alt="Zoo" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1536585144670-7613768f075d?q=80&w=400&auto=format&fit=crop" alt="HK Construction" class="front-page-card flex-shrink-0">
+                
+                <!-- Duplicate Set -->
+                <img src="https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?q=80&w=400&auto=format&fit=crop" alt="Environmental" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=400&auto=format&fit=crop" alt="Family" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=400&auto=format&fit=crop" alt="Subway" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" alt="Classroom" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1555541624-95b7dd55f042?q=80&w=400&auto=format&fit=crop" alt="Zoo" class="front-page-card flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1536585144670-7613768f075d?q=80&w=400&auto=format&fit=crop" alt="HK Construction" class="front-page-card flex-shrink-0">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Light Theme) -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 tracking-tight uppercase">
+                About Me
+            </h2>
+            
+            <!-- Content Area (Full Width) -->
+            <div class="flex flex-col md:flex-row-reverse gap-12 items-start">
+                <!-- Profile Image: Professional Online Placeholder -->
+                <div class="w-full md:w-1/3 max-w-[320px]">
+                    <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-indigo-500/10 bg-slate-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="LU Juncheng" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <!-- Text Content -->
+                <div class="w-full md:w-2/3 prose prose-lg text-slate-600 max-w-none pt-4">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-6 tracking-tight">Journalism Student / Investigative Reporter</h3>
+                    <p class="leading-relaxed mb-6 text-lg">
+                        I am a journalist dedicated to the rigors of investigative reporting. My work moves beyond the headline to understand the systemic causes of societal issues. 
+                    </p>
+                    <p class="leading-relaxed mb-6 text-lg">
+                        With a background in both field reporting and data analysis, I bridge the gap between human stories and hard statistics. Whether I'm chronicling environmental policy shifts over two decades or uncovering apathy in vocational education, my goal is to present the truth with clarity and impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (Light Theme) -->
+    <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 tracking-tight uppercase">
+                Skills
+            </h2>
+            
+            <!-- Tags Area (Full Width) -->
+            <div class="flex flex-wrap gap-3">
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Evidence-based Research</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Fact-checking</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Cross-verification</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Stakeholder Interviewing</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Concept Simplification</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Storytelling</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Market Intelligence</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Data Visualization</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Advanced MS Excel</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Basic Python</span>
+                <span class="px-5 py-2.5 rounded-full border border-slate-200 bg-white text-slate-700 text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 hover:shadow-md transition-all cursor-default">Prompt Engineering</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Works (Light Theme with Cards) -->
+    <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 tracking-tight uppercase">
+                Selected Works
+            </h2>
+            
+            <!-- Cards Container -->
+            <div class="space-y-12 pb-24">
+                
+                <!-- Project 1 (Poplar) - Online Image -->
+                <a href="https://mp.weixin.qq.com/s/aZaV322uVZ_uF4Mq-_ZW2Q" target="_blank" class="block sticky top-28 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?q=80&w=400&auto=format&fit=crop" alt="Poplar Trees" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Environmental Policy Investigation
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                毛白杨生，毛白杨死：杨絮飘过京城二十年
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Spearheaded independent interviews and coordinated directly with government departments and scientific research institutions.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2 (Abducted) - Online Image -->
+                <a href="https://mp.weixin.qq.com/s/Ngjlr4WAEuz9LKrlrrFxTw" target="_blank" class="block sticky top-32 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=400&auto=format&fit=crop" alt="Family Reunion" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Exclusive Feature Story
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                被拐卖的解清帅回家这一年
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Interviewed and wrote independently. Conducted three days of immersive field reporting, living with the subject’s family to produce this exclusive feature.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 (Subway) - Online Image -->
+                <a href="https://mp.weixin.qq.com/s/1NSzhUJEHCjvhVhn6gwmOg" target="_blank" class="block sticky top-36 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?q=80&w=400&auto=format&fit=crop" alt="Metro Station" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Civil Rights & Legal Report
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                输掉官司后，改变重庆地铁
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Interviewed and wrote independently. Crafted a high-impact narrative focused on a legal battle between a university student and the municipal metro system.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4 (Vocational) - Online Image -->
+                <a href="https://mp.weixin.qq.com/s/68TJIXBmNKWE6_fa8LTk6w" target="_blank" class="block sticky top-40 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" alt="Classroom" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                             <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Undercover Education Investigation
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                进技校，老师比学生还会“混日子”
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Interviewed and wrote independently, exposing systemic apathy within the vocational education system.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5 (Zoo) - Online Image -->
+                <a href="https://mp.weixin.qq.com/s/U5Cgah2JTIKqiTNZI6vpjQ" target="_blank" class="block sticky top-44 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1555541624-95b7dd55f042?q=80&w=400&auto=format&fit=crop" alt="Zoo" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Sociological Feature
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                失落的东北老县城，有一家全民喂养的动物园
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Interviewed and wrote independently. Conducted three days of on-site reporting in a shrinking industrial town in Northeast China.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 6 (ESLS) - Online Image -->
+                <a href="https://medium.com/@delwynmacain/beyond-controversy-what-change-has-the-enhanced-supplementary-labour-scheme-brought-to-hong-kong-0c94e29069f8" target="_blank" class="block sticky top-48 project-card rounded-2xl p-6 md:p-8 hover:shadow-xl hover:-translate-y-1">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-full md:w-36 flex-shrink-0">
+                             <img src="https://images.unsplash.com/photo-1536585144670-7613768f075d?q=80&w=400&auto=format&fit=crop" alt="Hong Kong Construction" class="w-full aspect-square bg-slate-100 rounded-xl object-cover grayscale hover:grayscale-0 transition-all shadow-sm">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="inline-block px-3 py-1 mb-3 rounded-full border border-slate-300 bg-white text-slate-600 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+                                Data Journalism & Policy Analysis
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3 hover:text-indigo-600 transition-colors">
+                                What Change Has the Enhanced Supplementary Labour Scheme Brought to Hong Kong
+                            </h3>
+                            <div class="text-slate-600 text-sm leading-relaxed">
+                                Collected and cleaned data, crafted narrative and made infographics with my groupmates.
+                            </div>
+                        </div>
+                        <div class="hidden md:block text-slate-300">
+                            <i class="fas fa-arrow-up-right-from-square hover:text-indigo-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-200 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 tracking-tight uppercase">
+                Experience
+            </h2>
+            
+            <!-- Timeline Cards -->
+            <div class="space-y-6">
+                
+                <!-- Role 1 -->
+                <div class="bg-white p-10 rounded-[2rem] border border-slate-200 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <!-- Left: Company & Title -->
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-4">Southern Weekly</div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Journalist Intern</h3>
+                    </div>
+                    <!-- Right: Desc & Date -->
+                    <div class="w-full md:w-1/2">
+                        <p class="text-slate-600 text-base leading-relaxed mb-6">
+                            Assisted mentor journalist from the Feature Studio in completing their work, independently reported news topics, conducted interviews, and wrote articles.
+                        </p>
+                        <div class="text-slate-400 font-medium">Dec 2023 - Jun 2024</div>
+                    </div>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="bg-white p-10 rounded-[2rem] border border-slate-200 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-4">NetEase Media Technology (Beijing) Co., Ltd</div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Journalist Intern</h3>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <p class="text-slate-600 text-base leading-relaxed mb-6">
+                            Contributed articles to NetEase's non-fiction column "Kanke Insight," which included independently reporting on topics, conducting interviews, and writing articles.
+                        </p>
+                        <div class="text-slate-400 font-medium">Aug 2023 - Dec 2023</div>
+                    </div>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="bg-white p-10 rounded-[2rem] border border-slate-200 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow">
+                    <div class="w-full md:w-1/2 flex flex-col">
+                        <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-4">Caijing</div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Journalist Intern</h3>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <p class="text-slate-600 text-base leading-relaxed mb-6">
+                            Responsible for content production of short videos on health industry information, completing the entire process including topic proposal application, copywriting, and video editing.
+                        </p>
+                        <div class="text-slate-400 font-medium">Feb 2023 - Jun 2023</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-4 sm:px-6 lg:px-8 bg-slate-100 relative overflow-hidden">
+        
+        <!-- Marquee Background Text -->
+        <div class="absolute top-10 left-0 w-full opacity-5 pointer-events-none select-none">
+            <div class="flex whitespace-nowrap animate-marquee">
+                <span class="text-[12rem] font-black uppercase contact-marquee-text mx-4 text-slate-900">Contact Me</span>
+                <span class="text-[12rem] font-black uppercase contact-marquee-text mx-4 text-slate-900">Get In Touch</span>
+                <span class="text-[12rem] font-black uppercase contact-marquee-text mx-4 text-slate-900">Contact Me</span>
+                <span class="text-[12rem] font-black uppercase contact-marquee-text mx-4 text-slate-900">Get In Touch</span>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12 tracking-tight uppercase">
+                Get in Touch
+            </h2>
+
+            <!-- Contact Info -->
+            <div class="flex flex-col gap-8 items-start">
+                
+                <a href="mailto:juncheng6393@gmail.com" class="group flex items-center gap-6 transition-all hover:translate-x-2">
+                    <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 group-hover:bg-black group-hover:text-white transition-colors">
+                        <i class="far fa-envelope text-2xl"></i>
+                    </div>
+                    <span class="text-2xl md:text-4xl font-medium text-slate-900 group-hover:text-slate-600 transition-colors">
+                        juncheng6393@gmail.com
+                    </span>
+                </a>
+
+                <div class="w-full h-px bg-slate-200 my-4"></div>
+
+                <a href="tel:+85262920612" class="group flex items-center gap-6 transition-all hover:translate-x-2">
+                        <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 group-hover:bg-black group-hover:text-white transition-colors">
+                        <i class="fas fa-phone-alt text-xl"></i>
+                    </div>
+                    <span class="text-2xl md:text-4xl font-medium text-slate-900 group-hover:text-slate-600 transition-colors">
+                        (+852) 62920612
+                    </span>
+                </a>
+                
+                <div class="mt-20 flex flex-col md:flex-row justify-between w-full items-end gap-6">
+                    <div class="text-xs text-slate-500 uppercase tracking-widest font-medium">
+                        &copy; 2024 LU Juncheng. All rights reserved.
+                    </div>
+                    <div class="flex gap-4">
+                         <a href="#" class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-black hover:text-white transition-all">
+                             <i class="fab fa-linkedin-in"></i>
+                         </a>
+                         <a href="#" class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-black hover:text-white transition-all">
+                             <i class="fab fa-twitter"></i>
+                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
